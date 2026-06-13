@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\IncomeController;
 use App\Http\Controllers\Api\PaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HangoutController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\HistoryController;
 
@@ -69,6 +70,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 
-
+  Route::middleware('auth:sanctum')->post('/hangouts', [HangoutController::class, 'store']);
 
 });
