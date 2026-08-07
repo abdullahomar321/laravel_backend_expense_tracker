@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('hangout_members', function (Blueprint $table) {
+        Schema::create('hangout_members', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('hangout_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->unique(['hangout_id', 'user_id']);
+            $table->timestamps();
         });
     }
 
@@ -23,11 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('hangout_members', function (Blueprint $table) {
-            $table->dropUnique(['hangout_id', 'user_id']);
-            $table->dropForeign(['hangout_id']);
-            $table->dropForeign(['user_id']);
-            $table->dropColumn(['hangout_id', 'user_id']);
-        });
+        Schema::dropIfExists('hangout_members');
     }
 };
